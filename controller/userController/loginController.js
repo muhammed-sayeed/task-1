@@ -1,8 +1,7 @@
 import bcrypt from "bcrypt"
 import jsonwebtoken from "jsonwebtoken"
-import { validationResult } from "express-validator"
 
-import Uzer from "../../models/user" 
+import Uzer from "../../models/user.js" 
 
 export const login = async(req,res)=>{
     try {

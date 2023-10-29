@@ -2,7 +2,7 @@ import jsonwebtoken from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import { validationResult } from 'express-validator'
 
-import Uzer from '../../models/user'
+import Uzer from '../../models/user.js'
 
 export const register = async(req,res)=>{
     try {
