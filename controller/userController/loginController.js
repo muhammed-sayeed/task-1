@@ -2,27 +2,15 @@ import bcrypt from "bcrypt"
 import jsonwebtoken from "jsonwebtoken"
 import { validationResult } from "express-validator"
 
-import User from "../../models/user.js"
+import Uzer from "../../models/user" 
 
 export const login = async(req,res)=>{
     try {
-        // const errors = validationResult(req);
-        //     if (!errors.isEmpty()) {
-        //       console.log(errors);
-        //       response.message =
-        //         errors.errors[0].path +
-        //         " " +
-        //         (errors.errors[0].msg == "Invalid value"
-        //           ? "is invalid, please check the value!"
-        //           : errors.errors[0].msg);
-        //       return res.status(200).json(response);
-        //     }
-        
             
         const email = req.body.email
         const password = req.body.password
 
-        const isUser = await User.findOne({email:email})
+        const isUser = await Uzer.findOne({email:email})
         if(isUser){
 
             const passCheck = await bcrypt.compare(password,isUser.password)

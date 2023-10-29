@@ -2,13 +2,12 @@ import jsonwebtoken from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import { validationResult } from 'express-validator'
 
-import User from '../../models/user.js'
+import Uzer from '../../models/user'
 
 export const register = async(req,res)=>{
     try {
         
         const errors = validationResult(req);
-
             if (!errors.isEmpty()) {
               console.log(errors);
             
@@ -18,23 +17,23 @@ export const register = async(req,res)=>{
                 (errors.errors[0].msg == "Invalid value"
                   ? "is invalid, please check the value!"
                   : errors.errors[0].msg);
-              return res.status(200).json({message});
+              return res.status(422).json({message});
             }
 
         const username = req.body.username
-        const isUsername = await User.findOne({username:username})
+        const isUsername = await Uzer.findOne({username:username})
         if(isUsername){
             res.status(409).json({message:'username already exist'})
         }else{
             const email = req.body.email
-            const isEmail = await User.findOne({email:email})
+            const isEmail = await Uzer.findOne({email:email})
             if(isEmail){
                 res.status(409).json({message:'email already exist'})
             }else{
                 const password = req.body.password
                 const hassedPassword = await bcrypt.hash(password,10)
         
-                const newUser = new User({
+                const newUser = new Uzer({
                     username: username,
                     email: email,
                     password: hassedPassword,
