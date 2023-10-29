@@ -1,10 +1,24 @@
 import bcrypt from "bcrypt"
 import jsonwebtoken from "jsonwebtoken"
+import { validationResult } from "express-validator"
 
 import User from "../../models/user.js"
 
 export const login = async(req,res)=>{
     try {
+        // const errors = validationResult(req);
+        //     if (!errors.isEmpty()) {
+        //       console.log(errors);
+        //       response.message =
+        //         errors.errors[0].path +
+        //         " " +
+        //         (errors.errors[0].msg == "Invalid value"
+        //           ? "is invalid, please check the value!"
+        //           : errors.errors[0].msg);
+        //       return res.status(200).json(response);
+        //     }
+        
+            
         const email = req.body.email
         const password = req.body.password
 
@@ -28,15 +42,7 @@ export const login = async(req,res)=>{
                        access:accessToken,
                        refresh:refreshToken
                    }
-                   jsonwebtoken.verify(accessToken,process.env.access_secret,function(err,decoded){
-                    if(err){
-                        console.log(err);
-                        return res.status(401).json({"error":true,"message":'unauthorized access'})
-             }else{
                 res.status(200).json({message:'successfully logined',tokens})
-             }
-            })
-                  
             }else{
                 res.status(409).json({message:'incorrect password'})
             }
