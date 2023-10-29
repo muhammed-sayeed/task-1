@@ -5,7 +5,8 @@ import roleBasedAuthentication from '../middlewares/authenticate.js'
 
 const userRoute = express.Router()
 
-import {register, login} from '../controller/userController/registerController.js'
+import {register} from '../controller/userController/registerController.js'
+import { login } from '../controller/userController/loginController.js'
 import { fetchProducts } from '../controller/userController/productController.js'
 
 userRoute.post('/register',loginValidator,register)
