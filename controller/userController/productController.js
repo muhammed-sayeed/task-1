@@ -5,6 +5,6 @@ export const fetchProducts = async(req,res)=>{
         const products = Products.find({})
         res.status(200).json({message:'products fetched successfully',products})
     } catch (error) {
-        res.status(400).json({message:'something went wrong'})
+        res.status(404).json({message:'Resources not found'})
     }
 }

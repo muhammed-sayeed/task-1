@@ -63,6 +63,6 @@ export const register = async(req,res)=>{
         }
         
     } catch (error) {
-        res.status(400).json({message:'somthing went wrong'})
+        res.status(404).json({message:'Resource Not Found'})
     }
 }
